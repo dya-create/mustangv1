@@ -1,20 +1,25 @@
-
 <!doctype html>
 <html lang="en">
 <!--
     Author:  Diya Patel
     Class:   Web & Distributed Programming 
+    Project: Mustang Version 1
+    Description: This application is intended to be a reference implementatin for Mustang. Do not copy and past it into your code. 
 -->
-<head>
-<meta charset="utf-8">
-    <title>Mustang Index</title>
-</head>
-<body>
-	This site hosts the Mustang index JSON file
-	<a href="index.json" target="_blank">[link]</a> 
-	<br/><br/>
-	Wonder Women  <a href="zxhtuzvymg.json" target="_blank">[link]</a><br/>
-	Micky  <a href="jwyhiknmaa.json" target="_blank">[link]</a><br/>
-	Diya Patel <a href="dbwewspkfx.json" target="_blank">[link]</a>br/>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Mustang Version One</title>
+        <link rel="stylesheet" href="mustang-lite.css">
+        <script src="mustang.js"></script>
+    </head>
+    <body onload="initApplication()">  
+        <h1>Mustang Version 1</h1>         
+        <button onclick="loadIndex()">Load Index</button><br>
+        Index:<p id="indexID"></p>
+
+        <button onclick="loadContacts()">Load Contacts</button><br>
+        Contacts:<p id="contactsID"></p>
+
+        <button onclick="logContacts()">Log Contacts to Console</button><br>
+    </body>
 </html>
