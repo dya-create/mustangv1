@@ -1,0 +1,25 @@
+{
+	"firstName":"Diya",
+	"lastName":"Patel",
+	"preferredName":"Diya",
+	"email":"diyapate@lewisu.edu",
+	"phoneNumber":"123-416-7891",
+	"class":"Web and Distributed Programming",
+	"room":"AS-104-A",
+	"startTime":"3pm CT",
+	"seatNumber":"23",
+	"inPerson":[
+		"Monday",
+		"Wednesday"
+	],
+	"virtual":[
+		"Friday"
+	],
+	"city":"Naperville",
+	"state":"IL",
+	"zip":"60565",
+	"lat":"41.88",
+	"lng":"-88.01",
+    "favoriteHobby":"Weight lifting",
+    "bornPlace": "India"
+}

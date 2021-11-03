@@ -1,0 +1,24 @@
+{
+	"firstName":"Wonder",
+	"lastName":"Women",
+	"preferredName":"Wonder Women",
+	"email":"wonderwomen@lewisu.edu",
+	"phoneNumber":"800-won-womnen",
+	"city":"Action",
+	"state":"NJ",
+	"zip":"07101",
+	"lat":"40.73",
+	"lng":"-74.17",
+	"favoriteHobby":"laughing",
+	"class":"cpsc-24700-001",
+	"room":"AS-104-A",
+	"startTime":"3pm CT",
+	"seatNumber":"13",
+	"inPerson":[
+	],
+	"virtual":[
+		"Monday",
+		"Wednesday",
+		"Friday"
+	]
+}

@@ -1,0 +1,25 @@
+{
+	"firstName":"Mick",
+	"lastName":"Mouse",
+	"preferredName":"Mickey Mouse",
+	"email":"mickeymouse@disney.com",
+	"phoneNumber":"800-255-5010",
+	"city":"Orlando",
+	"state":"FL",
+	"zip":"32830",
+	"lat":"28.39",
+	"lng":"-81.53",
+	"favoriteHobby":"Looking for Minnie Mouse",
+	"class":"cpsc-24700-001",
+	"room":"AS-104-A",
+	"startTime":"3pm CT",
+	"seatNumber":"",
+	"inPerson":[
+	],
+	"virtual":[
+		"Monday",
+		"Wednesday",
+		"Friday"
+	],
+	"favoriteSport": "Water Skiing"
+}
