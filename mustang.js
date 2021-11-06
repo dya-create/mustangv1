@@ -23,14 +23,16 @@ function loadIndex() {
     indexRequest.send();
 }
 
+//load contact fucntion
 function loadContacts() {
-    // Clear the current contactArray.
+    
+    //setting contact array length to 0
     contactArray.length = 0;
+   
+    // settinng number of loaded contact to 0
     loadingContact = 0;
 
-    // Note that W3C documentation and my experimentation indicate that each XMLHttpRequest callback function must be a 
-    // unique instance of a function. A better implmentation would have had an array of callback functions and a multithreaded
-    // inplementation instead of a recursive synchronous call to load.
+    //if 
     if (contactURLArray.length > loadingContact) {
         loadNextContact(contactURLArray[loadingContact]);
     }
@@ -38,13 +40,13 @@ function loadContacts() {
 
 function loadNextContact(URL) {
     console.log("URL: " + URL);
-    contactRequest = new XMLHttpRequest();
-    contactRequest.open('GET', URL);
-    contactRequest.onload = function() {
-        console.log(contactRequest.responseText);
+    request = new XMLHttpRequest();
+    request.open('GET', URL); // open the url 
+    request.onload = function() {
+        console.log(request.responseText);
         var contact;
-        contact = JSON.parse(contactRequest.responseText);
-        console.log("Contact: " + contact.firstName);
+        contact = JSON.parse(request.responseText);
+        console.log("Contact: " + contact.firstName); // display first name
         contactArray.push(contact);
         document.getElementById("contactsID").innerHTML = JSON.stringify(contactArray);
 
@@ -54,7 +56,7 @@ function loadNextContact(URL) {
         }
     }
 
-    contactRequest.send();
+    request.send();
 }
 
 function logContacts() {

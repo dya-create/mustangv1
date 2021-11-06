@@ -1,1 +1,22 @@
-h1 { color:palevioletred; }
+h1 { 
+    color:palevioletred;
+background-color: bisque;
+text-align: center; }
+
+body{
+    text-align: center;
+    background-color: aqua;
+}
+
+button {
+    background-color:yellowgreen; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
