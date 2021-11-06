@@ -7,7 +7,7 @@ function initApplication() {
 }
 
 function loadIndex() {
-    // Load the Mustang index file.
+    // Load the index file
     var indexRequest = new XMLHttpRequest();
     indexRequest.open('GET', 'https://hostingjson.azurewebsites.net/index.json');
     indexRequest.onload = function() {
@@ -40,13 +40,21 @@ function loadContacts() {
 
 function loadNextContact(URL) {
     console.log("URL: " + URL);
+    
+    // creating XMLHttpRequest object
     request = new XMLHttpRequest();
-    request.open('GET', URL); // open the url 
+    request.open('GET', URL); // request, open the url 
+
+    // callback function
     request.onload = function() {
+
+        // return data as string
         console.log(request.responseText);
         var contact;
         contact = JSON.parse(request.responseText);
         console.log("Contact: " + contact.firstName); // display first name
+
+        // pushing contact to array 
         contactArray.push(contact);
         document.getElementById("contactsID").innerHTML = JSON.stringify(contactArray);
 
