@@ -1,9 +1,9 @@
-var contactURLArray = [];
+var URLArray = [];
 var contactArray = [];
-var loadingContact = 0;
+var loading = 0;
 
 function initApplication() {
-    console.log('Mustang Lite - Starting!'); 
+    console.log('Mustang Version 1 Starting....!'); 
 }
 
 function loadIndex() {
@@ -14,11 +14,11 @@ function loadIndex() {
         console.log("Index JSON:" + indexRequest.responseText);
         document.getElementById("indexID").innerHTML = indexRequest.responseText;
         contactIndex = JSON.parse(indexRequest.responseText);
-        contactURLArray.length = 0;
+        URLArray.length = 0;
         for (i=0; i<contactIndex.length; i++) {
-            contactURLArray.push(contactIndex[i].ContactURL);
+            URLArray.push(contactIndex[i].ContactURL);
         }
-        console.log("ContactURLArray: " + JSON.stringify(contactURLArray));
+        console.log("URLArray: " + JSON.stringify(URLArray));
     }
     indexRequest.send();
 }
@@ -30,11 +30,11 @@ function loadContacts() {
     contactArray.length = 0;
    
     // settinng number of loaded contact to 0
-    loadingContact = 0;
+    loading = 0;
 
     //if 
-    if (contactURLArray.length > loadingContact) {
-        loadNextContact(contactURLArray[loadingContact]);
+    if (URLArray.length > loading) {
+        loadNextContact(URLArray[loading]);
     }
 }
 
@@ -58,9 +58,9 @@ function loadNextContact(URL) {
         contactArray.push(contact);
         document.getElementById("contactsID").innerHTML = JSON.stringify(contactArray);
 
-        loadingContact++;
-        if (contactURLArray.length > loadingContact) {
-            loadNextContact(contactURLArray[loadingContact]);
+        loading++;
+        if (URLArray.length > loading) {
+            loadNextContact(URLArray[loading]);
         }
     }
 
