@@ -39,34 +39,60 @@ function loadContacts() {
     }
 }
 
-async function loadnextcontact(URL){
+async function loadnextcontact(URL) {
 
-    console.log("URL: "+ URL);
-    //request = new XMLHttpRequest();
-    // fetch url
-    const response = await fetch(URL)
-    const contact = await response.json();
+
+    console.log("URL: " + URL);
     
-    //var string = contact.text();
-    console.log(contact);
-   
-     
-    console.log("Contact: " + contact.firstName);
-    contactArray.push(contact)
+    // creating XMLHttpRequest object
+    contactRequest = new XMLHttpRequest();
+    contactRequest.open('GET', URL, true); // request, open the url 
 
-    contactArray.push(contact);
-    document.getElementById("contactsID").innerHTML = JSON.stringify(contactArray);
+    // callback function
+    contactRequest.onreadystatechange= function() {
 
-    loading++;
+        console.log(contactRequest.responseText);
+        var contact;
+        contact = JSON.parse(contactRequest.responseText);
+        console.log("Contact: " + contact.firstName); // display first name
 
-    if (URLArray.length > loading){
-        loadnextcontact(URLArray[loading]);
+        // pushing contact to array 
+        contactArray.push(contact);
+        
+        document.getElementById("contactsID").innerHTML = JSON.stringify(contactArray);
+        if (contactRequest.readyState == 0){
+            document.getElementById("statusID").innerHTML = "Uninitiated: Objects conntains no data";
+
+        }
+        else if (contactRequest.readyState == 1){
+            document.getElementById("statusID").innerHTML = "Loading: Objects loading";
+
+        }
+        else if (contactRequest.readyState == 2){
+            document.getElementById("statusID").innerHTML = "Loaded: Objects are loaded";
+
+        }else if (contactRequest.readyState == 3){
+            document.getElementById("statusID").innerHTML = "Interactive: User may interract with the object even though its not fully loaded";
+
+        }else if (contactRequest.readyState == 4){
+            document.getElementById("statusID").innerHTML = "Complete: Objects has finished intialiizing";
+
+        }
+        
+
+        loading++;
+        if (URLArray.length > loading) {
+            loadnextcontact(URLArray[loading]);
+        }
     }
+
+    contactRequest.send(null);
 }
 
 function logContacts() {
     console.log(contactArray);
 }
+
 
 
 
