@@ -1,7 +1,7 @@
 var URLArray = [];
 var contactArray = [];
 var loading = 0;
-var status = 0;
+let status = 0;
 
 function initApplication() {
     console.log('Mustang Version 1 Starting....!'); 
