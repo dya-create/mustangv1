@@ -56,7 +56,7 @@ async function loadNextContact(URL) {
 
     contactArray.push(contact);
 
-    document.getElementById("statusID").innerHTML = "Status : " + status + "%";
+    document.getElementById("statusID").innerHTML = "Contacts Loading : " + status + "%";
     status = status + 6;
     if(status > 100){
         status = 100
