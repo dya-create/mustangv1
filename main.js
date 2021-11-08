@@ -5,11 +5,10 @@ var loading = 0;
 function initApplication() {
     console.log('Mustang Version 1 Starting....!'); 
 }
-
 function loadIndex() {
     // Load the index file
     var indexRequest = new XMLHttpRequest();
-    indexRequest.open('GET', 'https://hostingjson.azurewebsites.net/index.json');
+    indexRequest.open('GET', 'https://mustang-index.azurewebsites.net/index.json');
     indexRequest.onload = function() {
         console.log("Index JSON:" + indexRequest.responseText);
         document.getElementById("indexID").innerHTML = indexRequest.responseText;
@@ -23,6 +22,8 @@ function loadIndex() {
     indexRequest.send();
 }
 
+    
+
 //load contact fucntion
 function loadContacts() {
     
@@ -34,42 +35,39 @@ function loadContacts() {
 
     //if 
     if (URLArray.length > loading) {
-        loadNextContact(URLArray[loading]);
+        loadnextcontact(URLArray[loading]);
     }
 }
 
-function loadNextContact(URL) {
-    console.log("URL: " + URL);
+async function loadnextcontact(URL){
+
+    console.log("URL: "+ URL);
+    //request = new XMLHttpRequest();
+    // fetch url
+    const response = await fetch(URL)
+    const contact = await response.json();
     
-    // creating XMLHttpRequest object
-    request = new XMLHttpRequest();
-    request.open('GET', URL); // request, open the url 
+    //var string = contact.text();
+    console.log(contact);
+   
+     
+    console.log("Contact: " + contact.firstName);
+    contactArray.push(contact)
 
-    // callback function
-    request.onload = function() {
+    contactArray.push(contact);
+    document.getElementById("contactsID").innerHTML = JSON.stringify(contactArray);
 
-        // return data as string
-        console.log(request.responseText);
-        var contact;
-        contact = JSON.parse(request.responseText);
-        console.log("Contact: " + contact.firstName); // display first name
+    loading++;
 
-        // pushing contact to array 
-        contactArray.push(contact);
-        document.getElementById("contactsID").innerHTML = JSON.stringify(contactArray);
-
-        loading++;
-        if (URLArray.length > loading) {
-            loadNextContact(URLArray[loading]);
-        }
+    if (URLArray.length > loading){
+        loadnextcontact(URLArray[loading]);
     }
-
-    request.send();
 }
 
 function logContacts() {
     console.log(contactArray);
 }
+
 
 
 
