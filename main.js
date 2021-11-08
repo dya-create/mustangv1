@@ -1,28 +1,34 @@
 var URLArray = [];
 var contactArray = [];
 var loading = 0;
+var status = 0;
 
 function initApplication() {
     console.log('Mustang Version 1 Starting....!'); 
 }
-function loadIndex() {
-    // Load the index file
-    var indexRequest = new XMLHttpRequest();
-    indexRequest.open('GET', 'https://mustang-index.azurewebsites.net/index.json');
-    indexRequest.onload = function() {
-        console.log("Index JSON:" + indexRequest.responseText);
-        document.getElementById("indexID").innerHTML = indexRequest.responseText;
-        contactIndex = JSON.parse(indexRequest.responseText);
-        URLArray.length = 0;
-        for (i=0; i<contactIndex.length; i++) {
-            URLArray.push(contactIndex[i].ContactURL);
-        }
-        console.log("URLArray: " + JSON.stringify(URLArray));
-    }
-    indexRequest.send();
-}
-
+async function loadIndex() {
     
+    //fetch url
+    const response = await fetch("https://mustang-index.azurewebsites.net/index.json")
+
+    //fetch text version
+    const contactIndex = await response.text() 
+
+    console.log("Index json" + contactIndex);
+    document.getElementById("indexID").innerHTML = contactIndex
+    
+
+    // fetching json version 
+    const responseTwo = await fetch("https://mustang-index.azurewebsites.net/index.json")
+    const contactIndexTwo= await responseTwo.json() 
+
+    for (i=0; i<contactIndexTwo.length; i++) {
+        URLArray.push(contactIndexTwo[i].ContactURL);
+    }
+    console.log("ContactURLArray: " + JSON.stringify(URLArray));
+}
+    
+
 
 //load contact fucntion
 function loadContacts() {
@@ -35,60 +41,40 @@ function loadContacts() {
 
     //if 
     if (URLArray.length > loading) {
-        loadnextcontact(URLArray[loading]);
+        loadNextContact(URLArray[loading]);
     }
 }
 
-async function loadnextcontact(URL) {
-
-
+async function loadNextContact(URL) {
     console.log("URL: " + URL);
+    const response = await fetch(URL)
+    const contactResponse = await response.text()
     
-    // creating XMLHttpRequest object
-    contactRequest = new XMLHttpRequest();
-    contactRequest.open('GET', URL, true); // request, open the url 
+    contact = JSON.parse(contactResponse)
+    console.log(contactResponse)
+    console.log("Contact: " + contact.firstName);
 
-    // callback function
-    contactRequest.onreadystatechange= function() {
+    contactArray.push(contact);
 
-        console.log(contactRequest.responseText);
-        var contact;
-        contact = JSON.parse(contactRequest.responseText);
-        console.log("Contact: " + contact.firstName); // display first name
+    document.getElementById("statusID").innerHTML = "Status : " + status + "%";
+    status = status + 6;
+    if(status > 100){
+        status = 100
+    }
+    console.log(status)
 
-        // pushing contact to array 
-        contactArray.push(contact);
-        
-        document.getElementById("contactsID").innerHTML = JSON.stringify(contactArray);
-        if (contactRequest.readyState == 0){
-            document.getElementById("statusID").innerHTML = "Uninitiated: Objects conntains no data";
+    document.getElementById("contactsID").innerHTML = JSON.stringify(contactArray)
+    console.log(contactArray)
 
-        }
-        else if (contactRequest.readyState == 1){
-            document.getElementById("statusID").innerHTML = "Loading: Objects loading";
+    loading++;
 
-        }
-        else if (contactRequest.readyState == 2){
-            document.getElementById("statusID").innerHTML = "Loaded: Objects are loaded";
-
-        }else if (contactRequest.readyState == 3){
-            document.getElementById("statusID").innerHTML = "Interactive: User may interract with the object even though its not fully loaded";
-
-        }else if (contactRequest.readyState == 4){
-            document.getElementById("statusID").innerHTML = "Complete: Objects has finished intialiizing";
-
-        }
-        
-
-        loading++;
-        if (URLArray.length > loading) {
-            loadnextcontact(URLArray[loading]);
-        }
+    if (URLArray.length > loading) {
+        loadNextContact(URLArray[loading]);
     }
 
-    contactRequest.send(null);
 }
 
+// log contacts to console
 function logContacts() {
     console.log(contactArray);
 }
